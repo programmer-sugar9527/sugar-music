@@ -1,0 +1,27 @@
+{
+  "containerPort": 80,
+  "minNum": 0,
+  "maxNum": 50,
+  "cpu": 1,
+  "mem": 1,
+  "policyType": "cpu",
+  "policyThreshold": 60,
+  "policyDetails": [
+    {
+      "PolicyType": "cpu",
+      "PolicyThreshold": 60
+    },
+    {
+      "PolicyType": "mem",
+      "PolicyThreshold": 60
+    }
+  ],
+  "envParams": {},
+  "customLogs": "stdout",
+  "dataBaseName":"sugar-music",
+  "executeSQLs":[
+    "CREATE DATABASE IF NOT EXISTS sugar-music;",
+    "USE springboot_demo;",
+    "CREATE TABLE IF NOT EXISTS `Counters` (`id` int(11) NOT NULL AUTO_INCREMENT, `count` int(11) NOT NULL DEFAULT 1, `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;"
+  ]
+}
