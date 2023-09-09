@@ -18,7 +18,7 @@ RUN mvn -s /app/settings.xml -f /app/pom.xml clean package
 # 选择运行时基础镜像
 FROM alpine:3.17.0
 
-ENV MYSQL_HOST 10.16.110.37
+ENV MYSQL_HOST 10.16.110.34
 ENV MYSQL_USERNAME music
 ENV MYSQL_PASSWORD Music2023
 ENV DATABASE_NAME sugar-music
