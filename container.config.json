@@ -21,7 +21,7 @@
   "dataBaseName":"sugar-music",
   "executeSQLs":[
     "CREATE DATABASE IF NOT EXISTS sugar-music;",
-    "USE springboot_demo;",
+    "USE sugar-music;",
     "CREATE TABLE IF NOT EXISTS `Counters` (`id` int(11) NOT NULL AUTO_INCREMENT, `count` int(11) NOT NULL DEFAULT 1, `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, `updatedAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`id`)) ENGINE = InnoDB DEFAULT CHARSET = utf8;"
   ]
 }
