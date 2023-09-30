@@ -18,7 +18,7 @@ RUN mvn -s /app/settings.xml -f /app/pom.xml clean package -Dspring.profiles.act
 # 选择运行时基础镜像
 FROM alpine:3.17.0
 
-ENV MYSQL_HOST 10.16.110.34:3306
+ENV MYSQL_HOST 10.16.110.42:3306
 ENV MYSQL_USERNAME music
 ENV MYSQL_PASSWORD Music2023
 ENV DATABASE_NAME sugar-music
@@ -49,4 +49,4 @@ EXPOSE 80
 # 执行启动命令.
 # 写多行独立的CMD命令是错误写法！只有最后一行CMD命令会被执行，之前的都会被忽略，导致业务报错。
 # 请参考[Docker官方文档之CMD命令](https://docs.docker.com/engine/reference/builder/#cmd)
-CMD ["java", "-jar", "/app/sugar_music-0.0.1.jar","--spring.profiles.active=prod"]
+CMD ["java", "-jar", "/app/sugar_music-0.0.1.jar"]
