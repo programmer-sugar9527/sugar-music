@@ -17,7 +17,6 @@ spring:
       hibernate:
         format_sql: true
     generate-ddl: false
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   flyway:
     enabled: true
   profiles:
