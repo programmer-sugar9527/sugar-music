@@ -1,8 +1,10 @@
 package music.kamilaself.top.sugar_music.vo;
 
-import javax.persistence.Column;
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class UserVo {
 
     private String id;
