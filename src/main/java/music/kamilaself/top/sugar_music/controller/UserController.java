@@ -1,13 +1,11 @@
 package music.kamilaself.top.sugar_music.controller;
 
+import music.kamilaself.top.sugar_music.dto.UserCreateDTO;
 import music.kamilaself.top.sugar_music.mapper.UserMapper;
 import music.kamilaself.top.sugar_music.service.UserService;
 import music.kamilaself.top.sugar_music.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +23,11 @@ public class UserController {
     List<UserVo> list() {
         return userService.list()
                 .stream().map(userMapper::toVO).collect(Collectors.toList());
+    }
+
+    @PostMapping("/")
+    UserVo create(@RequestBody UserCreateDTO userCreateDTO) {
+        return userMapper.toVO(userService.create(userCreateDTO));
     }
 
     @Autowired
