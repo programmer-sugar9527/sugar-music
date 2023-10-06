@@ -54,5 +54,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConfig.EXPIRATION_TIME))
                 .sign(Algorithm.HMAC512(SecurityConfig.SECRET.getBytes()));
         response.addHeader(SecurityConfig.HEADER_STRING,SecurityConfig.TOKEN_PREFIX + token);
+        //将Authorization请求头进行暴露
+        response.addHeader("Access-Control-Expose-Headers",SecurityConfig.HEADER_STRING);
     }
 }
