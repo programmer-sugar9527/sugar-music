@@ -1,7 +1,8 @@
 package music.kamilaself.top.sugar_music.service.impl;
 
-import music.kamilaself.top.sugar_music.dto.UserCreateDTO;
+import music.kamilaself.top.sugar_music.dto.UserCreateRequest;
 import music.kamilaself.top.sugar_music.dto.UserDTO;
+import music.kamilaself.top.sugar_music.dto.UserUpdateRequest;
 import music.kamilaself.top.sugar_music.entity.User;
 import music.kamilaself.top.sugar_music.enums.ExceptionType;
 import music.kamilaself.top.sugar_music.exception.BizException;
@@ -9,6 +10,8 @@ import music.kamilaself.top.sugar_music.mapper.UserMapper;
 import music.kamilaself.top.sugar_music.repository.UserRepository;
 import music.kamilaself.top.sugar_music.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,9 +34,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO create(UserCreateDTO userCreateDTO) {
-        checkUserName(userCreateDTO.getUsername());
-        User user = userMapper.createEntity(userCreateDTO);
+    public UserDTO create(UserCreateRequest userCreateRequest) {
+        checkUserName(userCreateRequest.getUsername());
+        User user = userMapper.createEntity(userCreateRequest);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userMapper.toDTO(repository.save(user));
     }
@@ -46,6 +49,39 @@ public class UserServiceImpl implements UserService {
         }
 
         return user.get();
+    }
+
+    @Override
+    public UserDTO get(String id) {
+        User user = repository.getUserById(id);
+        if (user == null) {
+            throw new BizException(ExceptionType.USER_NOT_FOUND);
+        }
+        return userMapper.toDTO(user);
+    }
+
+    @Override
+    public UserDTO update(String id, UserUpdateRequest userUpdateRequest) {
+        User user = repository.getUserById(id);
+        if (user == null) {
+            throw new BizException(ExceptionType.USER_NOT_FOUND);
+        }
+        return userMapper.toDTO(repository.save(userMapper.updateEntity(user,userUpdateRequest)));
+    }
+
+    @Override
+    public void delete(String id) {
+        User user = repository.getUserById(id);
+        if (user == null) {
+            throw new BizException(ExceptionType.USER_NOT_FOUND);
+        }
+
+        repository.delete(user);
+    }
+
+    @Override
+    public Page<UserDTO> search(Pageable pageable) {
+        return repository.findAll(pageable).map(userMapper::toDTO);
     }
 
     private void checkUserName(String username) {
