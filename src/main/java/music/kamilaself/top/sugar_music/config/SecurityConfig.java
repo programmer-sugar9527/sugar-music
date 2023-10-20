@@ -35,7 +35,7 @@ public class SecurityConfig  {
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,SIGN_UP_URL).permitAll()
+//                .antMatchers(HttpMethod.POST,SIGN_UP_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))

@@ -20,9 +20,9 @@ public abstract class BaseEntity {
     private String id;
 
     @CreationTimestamp
-    private Date created_time;
+    private Date createdTime;
 
     @UpdateTimestamp
-    private  Date updated_time;
+    private  Date updatedTime;
 
 }
